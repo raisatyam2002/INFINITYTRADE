@@ -5,6 +5,7 @@ import Home from "./components/home";
 import Signup from "./components/signup";
 import Login from "./components/login";
 import MarketPerformer from "./components/market-view";
+import Stock from "./components/Stock";
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/market-view" element={<MarketPerformer />} />
+        <Route path="/stock/:ticker" element={<Stock />} />
       </Routes>
     </BrowserRouter>
   );

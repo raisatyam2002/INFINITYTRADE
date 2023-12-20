@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const { db, User } = require("./dataBase/UserSchema");
-const authRoutes = require("./authentication/Signin");
+const authRoutes = require("./authentication/auth");
 const stockRoutes = require("./stockRoutes/stockGainerLoser");
 const app = express();
 app.use(bodyParser.json());
