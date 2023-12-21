@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import animation4 from "./animation4.json";
 import { useNavigate } from "react-router-dom";
 import animation1 from "./animation1.json";
+import landing from "./landing.json";
 function Home() {
   const navigate = useNavigate();
 
@@ -60,7 +61,10 @@ function Home() {
               src="https://i.postimg.cc/QM0wHxm2/Screenshot-2023-12-15-at-8-12-50-PM.png"
             ></img> */}
 
-        <Lottie className="mr-10 w-[600px]" animationData={animation1}></Lottie>
+        <Lottie
+          className="mr-10 w-[650px] h-[600px]"
+          animationData={landing}
+        ></Lottie>
       </div>
     </div>
   );
