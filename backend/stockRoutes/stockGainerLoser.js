@@ -11,10 +11,32 @@ router.get("/market-performance", async (req, res) => {
     // const firstFiveTopLosers = data.top_losers.slice(0, 5);
     // console.log("First five top gainers:", firstFiveTopGainers);
     // console.log("First five top losers:", firstFiveTopLosers);
+    // req.io.emit("marketData", {
+    //   message: "satyam",
+    // });
+    let updateCount = 0;
+    updateCount++;
+    req.io.on("connection", (socket) => {
+      console.log(`User connected: ${socket.id}`);
+
+      // Event listener for 'marketData'
+      console.log("hello");
+      //
+      socket.emit("marketData", {
+        count: updateCount,
+        topGainers: firstFiveTopGainers,
+        topLosers: firstFiveTopLosers,
+      });
+
+      console.log("world");
+    });
+
+    // console.log(req.io);
     res.json({
       topGainers: firstFiveTopGainers,
       topLosers: firstFiveTopLosers,
     });
+    console.log(firstFiveTopGainers);
   } catch (error) {
     res.status(500).json({ error: "An error occurred while fetching data" });
   }
@@ -25,33 +47,33 @@ router.get("/market-performance", async (req, res) => {
 //     res.status(500).json({ error: "An error occurred while fetching data" });
 //   }
 // });
-router.get("/stockDetail", async (req, res) => {
-  try {
-    // const response = await axios.get(
-    //   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
-    // );
+// router.get("/stockDetail", async (req, res) => {
+//   try {
+//     const response = await axios.get(
+//       `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
+//     );
 
-    // const data = response.data;
-    // // console.log(data);
-    // const Xvalues = [];
-    // const Yvalues = [];
-    // for (var key in data["Time Series (Daily)"]) {
-    //   Xvalues.push(key);
-    //   Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
-    // }
-    // console.log({
-    //   Xaxis: Xaxis,
-    //   Yaxis: Yaxis,
-    // });
-    res.json({
-      Xaxis: Xaxis,
-      Yaxis: Yaxis,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "an error occured while fetching data" });
-  }
-});
+//     const data = response.data;
+//     // console.log(data);
+//     const Xvalues = [];
+//     const Yvalues = [];
+//     for (var key in data["Time Series (Daily)"]) {
+//       Xvalues.push(key);
+//       Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
+//     }
+//     console.log({
+//       Xaxis: Xaxis,
+//       Yaxis: Yaxis,
+//     });
+//     res.json({
+//       Xaxis: Xaxis,
+//       Yaxis: Yaxis,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ error: "an error occured while fetching data" });
+//   }
+// });
 
 const firstFiveTopGainers = [
   {

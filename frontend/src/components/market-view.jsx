@@ -8,7 +8,11 @@ import { useNavigate } from "react-router-dom";
 import bull from "./bull.json";
 import bear from "./bear.json";
 import Lottie from "lottie-react";
+import io from "socket.io-client";
+
 function MarketPerformer() {
+  const [count, setCount] = useState(0);
+  const socket = io.connect("http://localhost:5000");
   const navigate = useNavigate();
   const [topGainers, setTopGainers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
@@ -42,6 +46,12 @@ function MarketPerformer() {
   useEffect(() => {
     if (email) {
       const getPerformer = async () => {
+        // socket.on("marketData", (data) => {
+        //   setCount(data.count);
+        //   setTopGainers(data.topGainers);
+        //   setTopLosers(data.topLosers);
+        //   console.log(data.topGainers);
+        // });
         try {
           const response = await axios.get(
             "http://localhost:5000/stocks/market-performance"
@@ -49,9 +59,15 @@ function MarketPerformer() {
           // console.log(response.data.topGainers);
           // console.log(response.data.topLosers);
 
-          setTopGainers(response.data.topGainers);
-          setTopLosers(response.data.topLosers);
-          console.log(topGainers);
+          // setTopGainers(response.data.topGainers);
+          // setTopLosers(response.data.topLosers);
+          // console.log(topGainers);
+          socket.on("marketData", (data) => {
+            setCount(data.count);
+            setTopGainers(data.topGainers);
+            setTopLosers(data.topLosers);
+            console.log(data.topGainers);
+          });
         } catch (error) {
           console.log(error);
         }
