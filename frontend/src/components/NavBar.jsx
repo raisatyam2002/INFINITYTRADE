@@ -1,6 +1,8 @@
 import React from "react";
-
-function NavBar() {
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+function NavBar(props) {
+  const navigate = useNavigate();
   return (
     <nav className="flex justify-between py-4 mx-4 my-2 flex-wrap">
       <img
@@ -10,17 +12,35 @@ function NavBar() {
         style={{ height: "70px" }}
       ></img>
       <ul className="flex justify-between space-x-12 px-6  text-2xl text-gray-900">
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-        <button
-          className="text-2xl h-9 px-5 font-serif bg-indigo-900 rounded-2xl text-white"
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          Login
-        </button>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/contact">Contact</Link>
+        </li>
+        {props.isLogin == true ? (
+          <button
+            className="text-2xl h-9 px-5 font-serif bg-indigo-900 rounded-2xl text-white"
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/");
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="text-2xl h-9 px-5 font-serif bg-indigo-900 rounded-2xl text-white"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login
+          </button>
+        )}
       </ul>
     </nav>
   );

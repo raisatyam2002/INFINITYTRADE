@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const api = "QQH6ZJ68O6SY7OSE";
+const api = "G62S7DA25DPQK7ZY";
 router.get("/market-performance", async (req, res) => {
   try {
     // const url = `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${api}`;
@@ -49,17 +49,18 @@ router.post("/stockDetail", async (req, res) => {
 });
 router.get("/stockDetail", async (req, res) => {
   try {
-    const response = await axios.get(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
-    );
+    // const response = await axios.get(
+    //   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
+    // );
 
-    const data = response.data;
-    // console.log(data);
-    const Xaxis = [];
-    const Y = [];
+    // const data = response.data;
+    // // console.log(data);
+    // const Xaxis = [];
+    // const Y = [];
     // for (var key in data["Time Series (Daily)"]) {
     //   Xvalues.push(key);
     //   Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
+    // }
 
     console.log({
       Xaxis: Xaxis,
@@ -72,6 +73,38 @@ router.get("/stockDetail", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "an error occured while fetching data" });
+  }
+});
+router.get("/trade", async (req, res) => {
+  try {
+    const response1 = await axios.get(
+      `https://www.alphavantage.co/query?function=EMA&symbol=IBM&interval=daily&time_period=5&series_type=open&apikey=${api}`
+    );
+    console.log(response1.data);
+    const emaData1 = response1.data["Technical Analysis: EMA"];
+    const firstKey1 = Object.keys(emaData1)[0];
+    // const
+    // res.json(emaData1[firstKey1]["EMA"]);
+    const response2 = await axios.get(
+      `https://www.alphavantage.co/query?function=EMA&symbol=IBM&interval=daily&time_period=20&series_type=open&apikey=${api}`
+    );
+    // console.log(response2.data);
+    const emaData2 = response2.data["Technical Analysis: EMA"];
+    const firstKey2 = Object.keys(emaData2)[0];
+    // res.json(emaData1[firstKey1]["EMA"]);
+    console.log(emaData1[firstKey1]["EMA"], emaData2[firstKey2]["EMA"]);
+    const fiveEma = Number(emaData1[firstKey1]["EMA"]);
+    const twentyEma = Number(emaData2[firstKey2]["EMA"]);
+    if (fiveEma > twentyEma) {
+      res.json({ signal: "BUY" });
+    } else if (fiveEma == twentyEma) {
+      res.json({ signal: "HOLD" });
+    } else {
+      res.json({ signal: "SELL" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ error: error });
   }
 });
 

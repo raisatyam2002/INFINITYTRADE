@@ -50,7 +50,7 @@ export default function Signup() {
   };
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar isLogin={false}></NavBar>
 
       <div class="flex flex-wrap my-36 mx-6 justify-around">
         <div class="w-1/2">

@@ -43,7 +43,7 @@ export default function Login() {
   };
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar isLogin={false}></NavBar>
       <div class="flex my-36 mx-6 justify-around flex-wrap">
         {/* <h1>{email}</h1>
       <h1>{password}</h1> */}

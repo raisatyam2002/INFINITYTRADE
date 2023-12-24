@@ -85,7 +85,7 @@ function MarketPerformer() {
     return (
       <div>
         <div className="mt-2 mb-80 h-10">
-          <NavBar></NavBar>
+          <NavBar isLogin={true}></NavBar>
           <div>
             <Search handleSearch={handleSearch}></Search>
             <div className="flex justify-center space-x-60 mt-[20px]">
