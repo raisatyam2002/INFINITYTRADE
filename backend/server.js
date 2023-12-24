@@ -13,6 +13,7 @@ const { Server } = require("socket.io");
 const { log } = require("console");
 const server = http.createServer(app);
 app.use(cors());
+const path = require("path");
 
 db.on("error", (error) => {
   console.error("MongoDB connection error:", error);
@@ -28,15 +29,6 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
   },
 });
-io.on("connection", (socket) => {
-  console.log(`User connected: ${socket.id}`);
-
-  // Event listener for 'marketData'
-  console.log("hello");
-  //
-
-  console.log("world");
-});
 
 // ----- socket done --//
 const key = process.env.key;
@@ -44,6 +36,7 @@ const key = process.env.key;
 app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
+
 app.use("/auth", authRoutes);
 app.use(
   "/stocks",

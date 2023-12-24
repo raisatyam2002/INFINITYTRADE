@@ -1,5 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
+import Lottie from "lottie-react";
+import landing from "./landing.json";
 function Contact() {
   return (
     <div className="mx-5 mt-5 mb-0" style={{ maxHeight: "100vh" }}>
@@ -19,9 +21,10 @@ function Contact() {
             concerns.
           </p>
         </div>
-        <div className="mr-10 w-[650px] h-[600px]">
-          {/* You might add a form or an illustration related to contacting */}
-        </div>
+        <Lottie
+          className="mr-10 w-[650px] h-[600px]"
+          animationData={landing}
+        ></Lottie>
       </div>
     </div>
   );

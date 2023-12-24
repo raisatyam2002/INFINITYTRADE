@@ -42,7 +42,7 @@ function Stock() {
     <div>
       <NavBar isLogin={true}></NavBar>
       <div className="flex justify-center">
-        {trade}
+        {/* {trade} */}
         <Plot
           className="border-4  border-blue-800 mt-30"
           data={[

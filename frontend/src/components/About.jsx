@@ -1,5 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
+import Lottie from "lottie-react";
+import landing from "./landing.json";
 function About() {
   return (
     <div className="mx-5 mt-5 mb-0" style={{ maxHeight: "100vh" }}>
@@ -22,10 +24,10 @@ function About() {
             in the world of trading.
           </p>
         </div>
-        <div className="mr-10 w-[650px] h-[600px]">
-          {/* Insert any visual elements or images related to your About page */}
-          {/* You might add an animation or image here */}
-        </div>
+        <Lottie
+          className="mr-10 w-[650px] h-[600px]"
+          animationData={landing}
+        ></Lottie>
       </div>
     </div>
   );
