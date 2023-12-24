@@ -41,39 +41,39 @@ router.get("/market-performance", async (req, res) => {
     res.status(500).json({ error: "An error occurred while fetching data" });
   }
 });
-// router.post("/stockDetail", async (req, res) => {
-//   try {
-//   } catch (error) {
-//     res.status(500).json({ error: "An error occurred while fetching data" });
-//   }
-// });
-// router.get("/stockDetail", async (req, res) => {
-//   try {
-//     const response = await axios.get(
-//       `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
-//     );
+router.post("/stockDetail", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred while fetching data" });
+  }
+});
+router.get("/stockDetail", async (req, res) => {
+  try {
+    // const response = await axios.get(
+    //   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
+    // );
 
-//     const data = response.data;
-//     // console.log(data);
-//     const Xvalues = [];
-//     const Yvalues = [];
-//     for (var key in data["Time Series (Daily)"]) {
-//       Xvalues.push(key);
-//       Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
-//     }
-//     console.log({
-//       Xaxis: Xaxis,
-//       Yaxis: Yaxis,
-//     });
-//     res.json({
-//       Xaxis: Xaxis,
-//       Yaxis: Yaxis,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ error: "an error occured while fetching data" });
-//   }
-// });
+    // const data = response.data;
+    // // console.log(data);
+    // const Xaxis = [];
+    // const Y = [];
+    // for (var key in data["Time Series (Daily)"]) {
+    //   Xvalues.push(key);
+    //   Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
+
+    console.log({
+      Xaxis: Xaxis,
+      Yaxis: Yaxis,
+    });
+    res.json({
+      Xaxis: Xaxis,
+      Yaxis: Yaxis,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "an error occured while fetching data" });
+  }
+});
 
 const firstFiveTopGainers = [
   {
