@@ -12,7 +12,7 @@ function Stock() {
     const getData = async () => {
       try {
         const getCoordinates = await axios.get(
-          "http://localhost:5000/stocks/stockDetail"
+          "https://infinitytrade.onrender.com/stocks/stockDetail"
         );
         const data = getCoordinates.data;
         console.log(data.Xaxis);
