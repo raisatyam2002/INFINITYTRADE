@@ -49,14 +49,14 @@ router.post("/stockDetail", async (req, res) => {
 });
 router.get("/stockDetail", async (req, res) => {
   try {
-    // const response = await axios.get(
-    //   `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
-    // );
+    const response = await axios.get(
+      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=${api}`
+    );
 
-    // const data = response.data;
-    // // console.log(data);
-    // const Xaxis = [];
-    // const Y = [];
+    const data = response.data;
+    // console.log(data);
+    const Xaxis = [];
+    const Y = [];
     // for (var key in data["Time Series (Daily)"]) {
     //   Xvalues.push(key);
     //   Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
