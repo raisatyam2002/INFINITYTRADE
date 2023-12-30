@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
         newUser
           .save()
           .then((savedUser) => {
-            console.log("User saved successfully:", savedUser);
+            // console.log("User saved successfully:", savedUser);
             const token = jwt.sign({ email }, key, { expiresIn: "1h" });
             res.json({ message: "User created successfully", token });
           })

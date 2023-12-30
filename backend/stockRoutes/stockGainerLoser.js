@@ -36,7 +36,7 @@ router.get("/market-performance", async (req, res) => {
       topGainers: firstFiveTopGainers,
       topLosers: firstFiveTopLosers,
     });
-    console.log(firstFiveTopGainers);
+    // console.log(firstFiveTopGainers);
   } catch (error) {
     res.status(500).json({ error: "An error occurred while fetching data" });
   }
@@ -62,10 +62,10 @@ router.get("/stockDetail", async (req, res) => {
     //   Yvalues.push(data["Time Series (Daily)"][key]["1. open"]);
     // }
 
-    console.log({
-      Xaxis: Xaxis,
-      Yaxis: Yaxis,
-    });
+    // console.log({
+    //   Xaxis: Xaxis,
+    //   Yaxis: Yaxis,
+    // });
     res.json({
       Xaxis: Xaxis,
       Yaxis: Yaxis,
