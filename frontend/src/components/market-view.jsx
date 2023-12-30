@@ -12,7 +12,7 @@ import io from "socket.io-client";
 
 function MarketPerformer() {
   const [count, setCount] = useState(0);
-  const socket = io.connect("https://infinitytrade.onrender.com/");
+  const socket = io.connect("http://localhost:5000/");
   const navigate = useNavigate();
   const [topGainers, setTopGainers] = useState([]);
   const [topLosers, setTopLosers] = useState([]);
@@ -25,7 +25,7 @@ function MarketPerformer() {
     const checkUser = async () => {
       try {
         const response = await axios.post(
-          "https://infinitytrade.onrender.com/auth/me",
+          "http://localhost:5000/auth/me",
           {},
           {
             headers: {
@@ -54,7 +54,7 @@ function MarketPerformer() {
         // });
         try {
           const response = await axios.get(
-            "https://infinitytrade.onrender.com/stocks/market-performance"
+            "http://localhost:5000/stocks/market-performance"
           );
           // console.log(response.data.topGainers);
           // console.log(response.data.topLosers);
