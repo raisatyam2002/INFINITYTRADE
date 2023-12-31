@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-
-mongoose.connect(process.env.mongoUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+import mongoose from "mongoose";
+const url: string | undefined = process.env.mongoUrl;
+if (!url) {
+  throw new Error("MongoDB URL is not defined");
+}
+mongoose.connect(url);
 
 const db = mongoose.connection;
 
@@ -16,4 +16,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = { db, User };
+export { db, User };

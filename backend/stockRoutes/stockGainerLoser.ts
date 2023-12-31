@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const axios = require("axios");
+import axios from "axios";
 const api = "G62S7DA25DPQK7ZY";
+import { io } from "../server";
 router.get("/market-performance", async (req, res) => {
   try {
     // const url = `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${api}`;
@@ -16,7 +17,7 @@ router.get("/market-performance", async (req, res) => {
     // });
     let updateCount = 0;
     updateCount++;
-    req.io.on("connection", (socket) => {
+    io.on("connection", (socket) => {
       console.log(`User connected: ${socket.id}`);
 
       // Event listener for 'marketData'
@@ -386,4 +387,4 @@ const Yaxis = [
   "144.2500",
   "143.8100",
 ];
-module.exports = router;
+export default router;

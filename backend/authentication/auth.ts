@@ -1,9 +1,9 @@
-const express = require("express");
-const jwt = require("jsonwebtoken");
-const { User } = require("../dataBase/UserSchema"); // Import the User model from your db file
-const key = process.env.key;
-const bcrypt = require("bcrypt");
-const authenticateJwt = require("../middleware/auth");
+import express from "express";
+import jwt from "jsonwebtoken";
+import { User } from "../dataBase/UserSchema"; // Import the User model from your db file
+import bcrypt from "bcrypt";
+const key: string | undefined = process.env.key;
+import authenticateJwt from "../middleware/auth";
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
@@ -29,8 +29,16 @@ router.post("/signup", async (req, res) => {
           .save()
           .then((savedUser) => {
             // console.log("User saved successfully:", savedUser);
-            const token = jwt.sign({ email }, key, { expiresIn: "1h" });
-            res.json({ message: "User created successfully", token });
+            if (key) {
+              const token = jwt.sign({ email }, key, {
+                expiresIn: "1h",
+              });
+              res.json({ message: "User created successfully", token });
+            } else {
+              // Handle the case where key is undefined
+              console.error("JWT key is not defined");
+              res.status(500).json({ message: "Internal Server Error" });
+            }
           })
           .catch((err) => {
             console.error("Error saving user:", err);
@@ -49,7 +57,7 @@ router.post("/login", async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    if (!user) {
+    if (user === null || user === undefined || user.secPass == null) {
       console.log("User does not exist or invalid credentials");
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -57,8 +65,13 @@ router.post("/login", async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, user.secPass);
     if (passwordMatch) {
       console.log("You are logged in");
-      const token = jwt.sign({ email }, key, { expiresIn: "1h" });
-      return res.json({ message: "User logged in successfully", token });
+      if (key) {
+        const token = jwt.sign({ email }, key, { expiresIn: "1h" });
+        return res.json({ message: "User logged in successfully", token });
+      } else {
+        console.error("JWT key is not defined");
+        res.status(500).json({ message: "Internal Server Error" });
+      }
     } else {
       console.log("User does not exist or invalid credentials");
       return res.status(401).json({ message: "Invalid credentials" });
@@ -77,7 +90,7 @@ router.post("/login", async (req, res) => {
 //   }
 // });
 router.post("/me", authenticateJwt, (req, res) => {
-  const user = req.user;
+  const user = req.headers["user"];
   if (user) {
     res.json({ email: user });
   } else {
@@ -87,4 +100,4 @@ router.post("/me", authenticateJwt, (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
