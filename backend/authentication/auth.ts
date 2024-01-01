@@ -5,8 +5,21 @@ import bcrypt from "bcrypt";
 const key: string | undefined = process.env.key;
 import authenticateJwt from "../middleware/auth";
 const router = express.Router();
-
+import { z } from "zod";
+let UserDetails = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  email: z.string().min(6),
+  password: z.string().min(6),
+});
 router.post("/signup", async (req, res) => {
+  const pasrsedInput = UserDetails.safeParse(req.body);
+  if (!pasrsedInput.success) {
+    res.status(411).json({
+      message: "Email and password must be at least 9 characters long.",
+    });
+    return;
+  }
   const { firstName, lastName, email, password } = req.body;
   console.log(req.body);
   var secPass = "";

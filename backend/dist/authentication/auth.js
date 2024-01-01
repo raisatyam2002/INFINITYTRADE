@@ -19,7 +19,21 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const key = process.env.key;
 const auth_1 = __importDefault(require("../middleware/auth"));
 const router = express_1.default.Router();
+const zod_1 = require("zod");
+let UserDetails = zod_1.z.object({
+    firstName: zod_1.z.string(),
+    lastName: zod_1.z.string(),
+    email: zod_1.z.string().min(6),
+    password: zod_1.z.string().min(6),
+});
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const pasrsedInput = UserDetails.safeParse(req.body);
+    if (!pasrsedInput.success) {
+        res.status(411).json({
+            message: "Email and password must be at least 9 characters long.",
+        });
+        return;
+    }
     const { firstName, lastName, email, password } = req.body;
     console.log(req.body);
     var secPass = "";

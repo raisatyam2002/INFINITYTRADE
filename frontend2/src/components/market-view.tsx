@@ -50,9 +50,7 @@ function MarketPerformer() {
 
     checkUser();
   }, []);
-  setTimeout(() => {
-    console.log({ top: topGainers });
-  }, 5000);
+
   useEffect(() => {
     if (email) {
       const getPerformer = async () => {
@@ -72,11 +70,12 @@ function MarketPerformer() {
           // setTopGainers(response.data.topGainers);
           // setTopLosers(response.data.topLosers);
           // console.log(topGainers);
+
           socket.on("marketData", (data: any) => {
             // setCount(data.count);
             setTopGainers(data.topGainers);
             setTopLosers(data.topLosers);
-            // console.log(data.topGainers);
+            console.log("hello", data.topGainers);
             // console.log({ top: topGainers });
           });
         } catch (error) {
@@ -117,6 +116,7 @@ function MarketPerformer() {
             <div className="container">
               <div className="flex flex-wrap justify-around space-x-12">
                 <h1 className="text-3xl font-medium">Top Gainers</h1>
+
                 {topGainers.map((stock: Stock, index: number) => (
                   <BasicCard
                     key={index}

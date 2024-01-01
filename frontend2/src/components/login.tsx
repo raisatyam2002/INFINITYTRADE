@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Link from "@mui/material/Link";
 import NavBar from "./NavBar";
 const defaultTheme = createTheme();
 
@@ -122,6 +123,13 @@ export default function Login() {
                     Login
                   </Button>
                   <Grid container justifyContent="flex-end"></Grid>
+                  <Grid container justifyContent="flex-end">
+                    <Grid item>
+                      <Link href="/signup" variant="body2">
+                        New User? Sign up
+                      </Link>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Box>
               {/* <Copyright sx={{ mt: 5 }} /> */}
