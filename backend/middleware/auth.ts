@@ -1,7 +1,9 @@
+import { Request, Response, NextFunction } from "express";
+
 const jwt = require("jsonwebtoken");
 const key = process.env.key;
 
-function authenticateJwt(req, res, next) {
+function authenticateJwt(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res
@@ -13,9 +15,9 @@ function authenticateJwt(req, res, next) {
 
   try {
     const user = jwt.verify(token, key);
-    req.user = user.email;
+    req.headers["user"] = user.email;
     next();
-  } catch (error) {
+  } catch (error: any) {
     if (error.name === "TokenExpiredError") {
       return res.status(401).json({ message: "Token expired" });
     }
@@ -25,4 +27,4 @@ function authenticateJwt(req, res, next) {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 }
-module.exports = authenticateJwt;
+export default authenticateJwt;

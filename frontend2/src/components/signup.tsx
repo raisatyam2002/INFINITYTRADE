@@ -1,10 +1,10 @@
-import * as React from "react";
+// import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -14,44 +14,46 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
+import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
-export default function Login() {
-  const navigate = useNavigate();
+export default function Signup() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const img = "https://i.postimg.cc/xjK9HVS5/19197351.jpg";
-  const handleLogin = async (e) => {
+  const navigate = useNavigate();
+  const handleLogin = async (e: any) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
     try {
-      const response = await axios.post(
-        // "https://infinitytrade.onrender.com/auth/login",
-        "http://localhost:5000/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:5000/auth/signup", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
       console.log(response.data.token);
       const token = response.data.token;
       localStorage.setItem("token", token);
       navigate("/market-view");
-    } catch (error) {
-      alert("invalid");
-      console.error("login error", error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 409) {
+        alert("User already exists");
+      } else {
+        console.error("Signup error", error);
+      }
     }
   };
   return (
     <>
       <NavBar isLogin={false}></NavBar>
-      <div class="flex my-36 mx-6 justify-around flex-wrap">
-        {/* <h1>{email}</h1>
-      <h1>{password}</h1> */}
-        <div class="w-1/2">
+
+      <div className="flex flex-wrap my-36 mx-6 justify-around">
+        <div className="w-1/2">
           <img src={img}></img>
         </div>
         <div>
@@ -70,10 +72,39 @@ export default function Login() {
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                  Login
+                  Sign up
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        autoComplete="given-name"
+                        name="firstName"
+                        required
+                        fullWidth
+                        id="firstName"
+                        label="First Name"
+                        autoFocus
+                        value={firstName}
+                        onChange={(e) => {
+                          setFirstName(e.target.value);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        id="lastName"
+                        label="Last Name"
+                        name="lastName"
+                        autoComplete="family-name"
+                        value={lastName}
+                        onChange={(e) => {
+                          setLastName(e.target.value);
+                        }}
+                      />
+                    </Grid>
                     <Grid item xs={12}>
                       <TextField
                         required
@@ -103,14 +134,6 @@ export default function Login() {
                         }}
                       />
                     </Grid>
-                    {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
                   </Grid>
                   <Button
                     type="submit"
@@ -119,9 +142,15 @@ export default function Login() {
                     sx={{ mt: 3, mb: 2 }}
                     onClick={handleLogin}
                   >
-                    Login
+                    Sign Up
                   </Button>
-                  <Grid container justifyContent="flex-end"></Grid>
+                  <Grid container justifyContent="flex-end">
+                    <Grid item>
+                      <Link href="/login" variant="body2">
+                        Already have an account? Log in
+                      </Link>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Box>
               {/* <Copyright sx={{ mt: 5 }} /> */}

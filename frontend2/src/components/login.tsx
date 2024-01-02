@@ -1,11 +1,11 @@
-import * as React from "react";
+// import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Link from "@mui/material/Link";
 import NavBar from "./NavBar";
 const defaultTheme = createTheme();
 
@@ -23,7 +24,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const img = "https://i.postimg.cc/xjK9HVS5/19197351.jpg";
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: any) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
@@ -48,10 +49,10 @@ export default function Login() {
   return (
     <>
       <NavBar isLogin={false}></NavBar>
-      <div class="flex my-36 mx-6 justify-around flex-wrap">
+      <div className="flex my-36 mx-6 justify-around flex-wrap">
         {/* <h1>{email}</h1>
       <h1>{password}</h1> */}
-        <div class="w-1/2">
+        <div className="w-1/2">
           <img src={img}></img>
         </div>
         <div>
@@ -122,6 +123,13 @@ export default function Login() {
                     Login
                   </Button>
                   <Grid container justifyContent="flex-end"></Grid>
+                  <Grid container justifyContent="flex-end">
+                    <Grid item>
+                      <Link href="/signup" variant="body2">
+                        New User? Sign up
+                      </Link>
+                    </Grid>
+                  </Grid>
                 </Box>
               </Box>
               {/* <Copyright sx={{ mt: 5 }} /> */}

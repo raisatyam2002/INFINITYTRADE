@@ -1,16 +1,16 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const http = require("http");
-const cors = require("cors");
-const dotenv = require("dotenv");
+import express from "express";
+import bodyParser from "body-parser";
+import http from "http";
+import cors from "cors";
+import dotenv from "dotenv";
 dotenv.config();
-const { db, User } = require("./dataBase/UserSchema");
-const authRoutes = require("./authentication/auth");
-const stockRoutes = require("./stockRoutes/stockGainerLoser");
+import { db, User } from "./dataBase/UserSchema";
+import authRoutes from "./authentication/auth";
+import stockRoutes from "./stockRoutes/stockGainerLoser";
 const app = express();
 app.use(bodyParser.json());
-const { Server } = require("socket.io");
-const { log } = require("console");
+import { Server } from "socket.io";
+// const { log } = require("console");
 const server = http.createServer(app);
 app.use(cors());
 const path = require("path");
@@ -23,7 +23,7 @@ db.once("open", () => {
 });
 //------- socket -------//
 
-const io = new Server(server, {
+export const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -38,11 +38,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
+
 app.use(
   "/stocks",
 
   (req, res, next) => {
-    req.io = io;
     next();
   },
   stockRoutes
