@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -7,7 +7,7 @@ function Stock() {
   const { ticker } = useParams();
   const [Xaxis, setXaxis] = useState([]);
   const [Yaxis, setYaxis] = useState([]);
-  const [trade, setTrade] = useState("BUY");
+  // const [trade, setTrade] = useState("BUY");
   useEffect(() => {
     const getData = async () => {
       try {
@@ -40,7 +40,7 @@ function Stock() {
   // }, []);
   return (
     <div>
-      <NavBar isLogin={true}></NavBar>
+      <NavBar></NavBar>
       <div className="flex justify-center">
         {/* {trade} */}
         <Plot

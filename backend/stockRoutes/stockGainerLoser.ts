@@ -15,22 +15,22 @@ router.get("/market-performance", async (req, res) => {
     // req.io.emit("marketData", {
     //   message: "satyam",
     // });
-    let updateCount = 0;
-    updateCount++;
-    io.on("connection", (socket) => {
-      console.log(`User connected: ${socket.id}`);
+    // let updateCount = 0;
+    // updateCount++;
+    // io.on("connection", (socket) => {
+    //   console.log(`User connected: ${socket.id}`);
 
-      // Event listener for 'marketData'
-      console.log("hello");
-      //
-      socket.emit("marketData", {
-        count: updateCount,
-        topGainers: firstFiveTopGainers,
-        topLosers: firstFiveTopLosers,
-      });
+    //   // Event listener for 'marketData'
+    //   console.log("hello");
+    //   //
+    //   socket.emit("marketData", {
+    //     count: updateCount,
+    //     topGainers: firstFiveTopGainers,
+    //     topLosers: firstFiveTopLosers,
+    //   });
 
-      console.log("world");
-    });
+    //   console.log("world");
+    // });
 
     // console.log(req.io);
     res.json({

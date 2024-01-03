@@ -16,7 +16,6 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const axios_1 = __importDefault(require("axios"));
 const api = "G62S7DA25DPQK7ZY";
-const server_1 = require("../server");
 router.get("/market-performance", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // const url = `https://www.alphavantage.co/query?function=TOP_GAINERS_LOSERS&apikey=${api}`;
@@ -29,20 +28,20 @@ router.get("/market-performance", (req, res) => __awaiter(void 0, void 0, void 0
         // req.io.emit("marketData", {
         //   message: "satyam",
         // });
-        let updateCount = 0;
-        updateCount++;
-        server_1.io.on("connection", (socket) => {
-            console.log(`User connected: ${socket.id}`);
-            // Event listener for 'marketData'
-            console.log("hello");
-            //
-            socket.emit("marketData", {
-                count: updateCount,
-                topGainers: firstFiveTopGainers,
-                topLosers: firstFiveTopLosers,
-            });
-            console.log("world");
-        });
+        // let updateCount = 0;
+        // updateCount++;
+        // io.on("connection", (socket) => {
+        //   console.log(`User connected: ${socket.id}`);
+        //   // Event listener for 'marketData'
+        //   console.log("hello");
+        //   //
+        //   socket.emit("marketData", {
+        //     count: updateCount,
+        //     topGainers: firstFiveTopGainers,
+        //     topLosers: firstFiveTopLosers,
+        //   });
+        //   console.log("world");
+        // });
         // console.log(req.io);
         res.json({
             topGainers: firstFiveTopGainers,

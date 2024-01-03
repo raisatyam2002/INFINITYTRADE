@@ -16,6 +16,8 @@ import { useState } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
+import { Userstate } from "../store/atoms/userState";
+import { useSetRecoilState } from "recoil";
 const defaultTheme = createTheme();
 
 export default function Signup() {
@@ -23,6 +25,7 @@ export default function Signup() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const setUser = useSetRecoilState(Userstate);
   const img = "https://i.postimg.cc/xjK9HVS5/19197351.jpg";
   const navigate = useNavigate();
   const handleLogin = async (e: any) => {
@@ -39,10 +42,16 @@ export default function Signup() {
       console.log(response.data.token);
       const token = response.data.token;
       localStorage.setItem("token", token);
+      setUser({
+        email: email,
+        isLogin: true,
+      });
       navigate("/market-view");
     } catch (error: any) {
       if (error.response && error.response.status === 409) {
         alert("User already exists");
+      } else if (error.response && error.response.status === 411) {
+        alert("email and password atleast 9 character long");
       } else {
         console.error("Signup error", error);
       }
@@ -50,7 +59,7 @@ export default function Signup() {
   };
   return (
     <>
-      <NavBar isLogin={false}></NavBar>
+      <NavBar></NavBar>
 
       <div className="flex flex-wrap my-36 mx-6 justify-around">
         <div className="w-1/2">

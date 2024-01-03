@@ -1,8 +1,8 @@
 import React from "react";
 import Lottie from "lottie-react";
-import animation4 from "./animation4.json";
+// import animation4 from "./animation4.json";
 import { useNavigate } from "react-router-dom";
-import animation1 from "./animation1.json";
+// import animation1 from "./animation1.json";
 import landing from "./landing.json";
 import NavBar from "./NavBar";
 function Home() {
@@ -15,7 +15,7 @@ function Home() {
         maxHeight: "100vh",
       }}
     >
-      <NavBar isLogin={false}></NavBar>
+      <NavBar></NavBar>
       <div className=" pt-40 flex justify-between pb-0 mx-4 mb-2 flex-wrap">
         <div className="px-6 ">
           <h1 className="text-5xl text-gray-700">Infinity Trade </h1>

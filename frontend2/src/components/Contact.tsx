@@ -5,7 +5,7 @@ import landing from "./landing.json";
 function Contact() {
   return (
     <div className="mx-5 mt-5 mb-0" style={{ maxHeight: "100vh" }}>
-      <NavBar isLogin={false} />
+      <NavBar />
       <div className="pt-40 flex justify-between pb-0 mx-4 mb-2 flex-wrap">
         <div className="px-6">
           <h1 className="text-5xl text-gray-700">Contact Us</h1>
