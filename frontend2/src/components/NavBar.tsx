@@ -1,8 +1,13 @@
-import React from "react";
+// import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-function NavBar(props) {
+import { isLoginSelector } from "../store/selectors/isLogin";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { Userstate } from "../store/atoms/userState";
+function NavBar() {
   const navigate = useNavigate();
+  const isLogin = useRecoilValue(isLoginSelector);
+  const setUser = useSetRecoilState(Userstate);
   return (
     <nav className="flex justify-between py-4 mx-4 my-2 flex-wrap">
       <img
@@ -21,11 +26,15 @@ function NavBar(props) {
         <li>
           <Link to="/contact">Contact</Link>
         </li>
-        {props.isLogin == true ? (
+        {isLogin ? (
           <button
             className="text-2xl h-9 px-5 font-serif bg-indigo-900 rounded-2xl text-white"
             onClick={() => {
               localStorage.removeItem("token");
+              setUser({
+                email: "",
+                isLogin: false,
+              });
               navigate("/");
             }}
           >

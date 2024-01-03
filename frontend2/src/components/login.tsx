@@ -17,6 +17,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
 import NavBar from "./NavBar";
+import { Userstate } from "../store/atoms/userState";
+import { useSetRecoilState } from "recoil";
+import { isLoginSelector } from "../store/selectors/isLogin";
+import { useRecoilValue } from "recoil";
 const defaultTheme = createTheme();
 
 export default function Login() {
@@ -24,6 +28,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const img = "https://i.postimg.cc/xjK9HVS5/19197351.jpg";
+  const setUser = useSetRecoilState(Userstate);
+  const isLogin = useRecoilValue(isLoginSelector);
   const handleLogin = async (e: any) => {
     e.preventDefault();
     console.log(email);
@@ -40,7 +46,10 @@ export default function Login() {
       console.log(response.data.token);
       const token = response.data.token;
       localStorage.setItem("token", token);
-      navigate("/market-view");
+      setUser({
+        email: email,
+        isLogin: true,
+      });
     } catch (error) {
       alert("invalid");
       console.error("login error", error);
@@ -48,7 +57,8 @@ export default function Login() {
   };
   return (
     <>
-      <NavBar isLogin={false}></NavBar>
+      <NavBar></NavBar>
+
       <div className="flex my-36 mx-6 justify-around flex-wrap">
         {/* <h1>{email}</h1>
       <h1>{password}</h1> */}
