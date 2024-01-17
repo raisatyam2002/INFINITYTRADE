@@ -3,14 +3,14 @@ import axios from "axios";
 import Search from "./Search";
 import BasicCard from "./Card";
 import NavBar from "./NavBar";
-import CircularProgress from "@mui/material/CircularProgress";
+// import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import bull from "./bull.json";
 import bear from "./bear.json";
 import Lottie from "lottie-react";
-import { io } from "socket.io-client";
-import { isLoginSelector } from "../store/selectors/isLogin";
-import { useRecoilValue } from "recoil";
+// import { io } from "socket.io-client";
+// import { isLoginSelector } from "../store/selectors/isLogin";
+// import { useRecoilValue } from "recoil";
 interface Stock {
   ticker: string;
   price: string;
@@ -21,11 +21,11 @@ interface Stock {
 type StockArray = Stock[];
 function MarketPerformer() {
   // const [count, setCount] = useState(0);
-  const socket = io("https://infinitytrade.onrender.com");
+  // const socket = io("https://infinitytrade.onrender.com");
   const navigate = useNavigate();
   const [topGainers, setTopGainers] = useState<StockArray>([]);
   const [topLosers, setTopLosers] = useState<StockArray>([]);
-  const isLogin = useRecoilValue(isLoginSelector);
+  // const isLogin = useRecoilValue(isLoginSelector);
 
   function handleSearch(ticker: string) {
     navigate(`/stock/${ticker}`);

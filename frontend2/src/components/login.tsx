@@ -14,22 +14,22 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
 import NavBar from "./NavBar";
 import { Userstate } from "../store/atoms/userState";
 import { useSetRecoilState } from "recoil";
-import { isLoginSelector } from "../store/selectors/isLogin";
-import { useRecoilValue } from "recoil";
+// import { isLoginSelector } from "../store/selectors/isLogin";
+// import { useRecoilValue } from "recoil";
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const img = "https://i.postimg.cc/xjK9HVS5/19197351.jpg";
   const setUser = useSetRecoilState(Userstate);
-  const isLogin = useRecoilValue(isLoginSelector);
+  // const isLogin = useRecoilValue(isLoginSelector);
   const handleLogin = async (e: any) => {
     e.preventDefault();
     console.log(email);
