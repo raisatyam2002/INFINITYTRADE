@@ -37,7 +37,7 @@ export default function Login() {
     try {
       const response = await axios.post(
         // "https://infinitytrade.onrender.com/auth/login",
-        "http://localhost:5000/auth/login",
+        "https://infinitytrade.onrender.com/auth/login",
         {
           email,
           password,

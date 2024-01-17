@@ -36,7 +36,7 @@ function InitUser() {
   const checkUser = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/auth/me",
+        "https://infinitytrade.onrender.com/auth/me",
         {},
         {
           headers: {

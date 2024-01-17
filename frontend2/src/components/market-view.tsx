@@ -21,7 +21,7 @@ interface Stock {
 type StockArray = Stock[];
 function MarketPerformer() {
   // const [count, setCount] = useState(0);
-  const socket = io("http://localhost:5000");
+  const socket = io("https://infinitytrade.onrender.com");
   const navigate = useNavigate();
   const [topGainers, setTopGainers] = useState<StockArray>([]);
   const [topLosers, setTopLosers] = useState<StockArray>([]);
@@ -93,7 +93,7 @@ function MarketPerformer() {
       const getPerformer = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:5000/stocks/market-performance"
+            "https://infinitytrade.onrender.com/stocks/market-performance"
           );
           console.log(response.data.topGainers);
           console.log(response.data.topLosers);
