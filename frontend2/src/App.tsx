@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom/client";
+// import React, { useEffect } from "react";
+// import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home";
 import Signup from "./components/signup";
