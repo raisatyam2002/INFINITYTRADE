@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
 import NavBar from "./NavBar";
 import { Userstate } from "../store/atoms/userState";
@@ -24,7 +24,7 @@ import { useSetRecoilState } from "recoil";
 const defaultTheme = createTheme();
 
 export default function Login() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const img = "https://i.postimg.cc/xjK9HVS5/19197351.jpg";
@@ -50,6 +50,7 @@ export default function Login() {
         email: email,
         isLogin: true,
       });
+      navigate("/market-view");
     } catch (error) {
       alert("invalid");
       console.error("login error", error);
