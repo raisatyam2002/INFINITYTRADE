@@ -52,7 +52,7 @@ function InitUser() {
       } else {
         setUser({
           email: "",
-          isLogin: false,
+          isLogin: false,  
         });
       }
     } catch (error) {
